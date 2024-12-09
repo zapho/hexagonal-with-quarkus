@@ -1,67 +1,65 @@
-# code-with-quarkus
+# hexagonal-with-quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+A Quarkus-based implementation of https://gitlab.com/beyondxscratch/hexagonal-architecture-java-springboot
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Must watch https://www.youtube.com/watch?v=-dXN8wkN0yk&t=2212s
 
-## Running the application in dev mode
+## Build it
 
-You can run your application in dev mode that enables live coding using:
-
-```shell script
-./mvnw compile quarkus:dev
+```shell
+mvn clean install -DskipITs=false
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## Run it (dev mode)
 
-## Packaging and running the application
+```shell
+mvn clean package
+cd app
+mvn quarkus:dev
+```
+## Test it
 
-The application can be packaged using:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{"numberOfPassengers": 20}' http://localhost:8080/rescueFleets
 
-```shell script
-./mvnw package
+# {"starships":[{"name":"Naboo star skiff","capacity":3},{"name":"Millennium Falcon","capacity":6},{"name":"Slave 1","capacity":6},{"name":"Scimitar","capacity":6}]}
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## Hexagonal Architecture Overview
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+This project demonstrates the implementation of Hexagonal Architecture (also known as Ports and Adapters) using Quarkus framework. The key aspects include:
 
-If you want to build an _über-jar_, execute the following command:
+- **Domain-Centric Design**: The business logic is isolated in the core domain, free from external dependencies
+- **Ports**: Defined interfaces that specify how the application interacts with the outside world
+- **Adapters**: Concrete implementations that connect the application to external systems
+  - Primary/Driving Adapters: Handle incoming requests (REST APIs, CLI)
+  - Secondary/Driven Adapters: Handle outgoing requests (Database, External Services)
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+The hexagonal structure ensures:
+- Clear separation of concerns
+- Business logic independence from technical implementations
+- Easier testing through adapter substitution
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Project Implementation
 
-## Creating a native executable
+This project implements the hexagonal architecture with the following structure:
 
-You can create a native executable using:
+### Core Domain (Hexagon)
+- Contains pure business logic and domain models
+- No dependencies on external frameworks or libraries
+- Defines ports (interfaces) for both incoming and outgoing operations
 
-```shell script
-./mvnw package -Dnative
-```
+### Primary Adapters (Driving Side)
+- REST API endpoints using Quarkus JAX-RS
+- Each adapter uses ports to communicate with the domain
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+### Secondary Adapters (Driven Side)
+- REST Client implementation to interact with external services
+- Implementation of repository interfaces defined in the domain
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+### Key Benefits in This Implementation
+- Domain logic can be tested in isolation
+- Easy to swap implementations (e.g., switch external service providers or mock them)
+- Clear boundaries between technical infrastructure and business rules
+- Dependency injection handled by Quarkus CDI
+- Flexible evolution of both domain and technical layers

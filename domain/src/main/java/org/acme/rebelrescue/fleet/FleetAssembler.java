@@ -12,12 +12,14 @@
 package org.acme.rebelrescue.fleet;
 
 import org.acme.rebelrescue.fleet.api.AssembleAFleet;
+import org.acme.ddd.DomainService;
 import org.acme.rebelrescue.fleet.spi.StarshipInventory;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@DomainService
 public class FleetAssembler implements AssembleAFleet {
 
     private final StarshipInventory starshipInventory;

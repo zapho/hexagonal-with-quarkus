@@ -11,13 +11,19 @@
  */
 package org.acme.rebelrescue.fleet.spi.stubs;
 
+import org.acme.ddd.Stub;
 import org.acme.rebelrescue.fleet.Starship;
 import org.acme.rebelrescue.fleet.spi.StarshipInventory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+@Stub
 public class StarshipInventoryStub implements StarshipInventory {
-    private List<Starship> starships;
+    private static final Logger LOG = LogManager.getLogger(StarshipInventoryStub.class);
+
+    private final List<Starship> starships;
 
     private static final List<Starship> DEFAULT_STARSHIPS = List.of(
             new Starship("X-Wing", 0),
@@ -28,6 +34,7 @@ public class StarshipInventoryStub implements StarshipInventory {
             new Starship("EF76 Nebulon-B escort frigate", 800));
 
     public StarshipInventoryStub(List<Starship> starships) {
+        LOG.info("Using stub starship inventory");
         this.starships = starships;
     }
 

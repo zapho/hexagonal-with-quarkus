@@ -1,0 +1,1 @@
+<!-- empty beans.xml allows for CDI discovery to work for this JAR, see https://quarkus.io/guides/cdi-reference#bean_discovery -->
