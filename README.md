@@ -17,6 +17,14 @@ mvn clean package
 cd app
 mvn quarkus:dev
 ```
+
+## Run it (prod mode)
+
+```shell
+mvn clean install
+java -jar app/target/quarkus-app/quarkus-run.jar
+```
+
 ## Test it
 
 ```shell
