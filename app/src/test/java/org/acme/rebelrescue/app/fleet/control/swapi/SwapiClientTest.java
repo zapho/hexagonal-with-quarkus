@@ -1,4 +1,4 @@
-package org.acme.rebelrescue.app.control.swapi;
+package org.acme.rebelrescue.app.fleet.control.swapi;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;

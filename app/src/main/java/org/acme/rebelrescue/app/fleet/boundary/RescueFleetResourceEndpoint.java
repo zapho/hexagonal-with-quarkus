@@ -1,4 +1,4 @@
-package org.acme.rebelrescue.app.boundary;
+package org.acme.rebelrescue.app.fleet.boundary;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -6,7 +6,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.rebelrescue.app.control.FleetMapper;
+import org.acme.rebelrescue.app.fleet.control.FleetMapper;
 import org.acme.rebelrescue.fleet.Fleet;
 import org.acme.rebelrescue.fleet.api.AssembleAFleet;
 import org.apache.logging.log4j.LogManager;

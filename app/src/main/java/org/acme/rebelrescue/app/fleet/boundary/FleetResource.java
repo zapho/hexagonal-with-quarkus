@@ -9,8 +9,10 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.boundary;
+package org.acme.rebelrescue.app.fleet.boundary;
 
-public class RescueFleetRequest {
-    public Integer numberOfPassengers;
+
+import java.util.List;
+
+public record FleetResource(List<StarshipResource> starships) {
 }

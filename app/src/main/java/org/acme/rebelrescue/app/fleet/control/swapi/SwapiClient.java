@@ -9,7 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.control.swapi;
+package org.acme.rebelrescue.app.fleet.control.swapi;
 
 import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;

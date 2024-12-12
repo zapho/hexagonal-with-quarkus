@@ -1,6 +1,7 @@
 # hexagonal-with-quarkus
 
 A Quarkus-based implementation of https://gitlab.com/beyondxscratch/hexagonal-architecture-java-springboot
+with some additional features.
 
 Must watch https://www.youtube.com/watch?v=-dXN8wkN0yk&t=2212s
 
@@ -27,10 +28,27 @@ java -jar app/target/quarkus-app/quarkus-run.jar
 
 ## Test it
 
+### Assemble a rescue fleet
+
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{"numberOfPassengers": 20}' http://localhost:8080/rescueFleets
 
 # {"starships":[{"name":"Naboo star skiff","capacity":3},{"name":"Millennium Falcon","capacity":6},{"name":"Slave 1","capacity":6},{"name":"Scimitar","capacity":6}]}
+```
+
+### Rebel bases
+
+```shell
+# List rebel bases
+curl http://localhost:8080/rebelBases
+# [{"name":"Tatooine","riskLevel":"SECURE","shipCapacity":10},{"name":"Dagobah","riskLevel":"COMPROMISED","shipCapacity":2}, ...]
+
+# Add a rebel base
+curl -v -X POST -H "Content-Type: application/json" -d '{"name": "My rebel base","riskLevel":"SECURE","shipCapacity":50}' http://localhost:8080/rebelBases
+
+# Find a rebel base for rescue fleet
+curl -v -X POST -H "Content-Type: application/json" -d '{"starshipNames": ["X-wing"],"riskLevel": "SECURE", "maxDurationInHours": 1}' http://localhost:8080/rebelBases/rescueCandidates
+# [{"name":"Tatooine","riskLevel":"SECURE","shipCapacity":10},{"name":"Endor","riskLevel":"SECURE","shipCapacity":3},{"name":"My rebel base 2","riskLevel":"SECURE","shipCapacity":50}]
 ```
 
 ## Hexagonal Architecture Overview

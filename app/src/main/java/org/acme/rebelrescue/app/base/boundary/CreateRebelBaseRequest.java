@@ -9,7 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.control.swapi;
+package org.acme.rebelrescue.app.base.boundary;
 
-public record SwapiStarship(String name, String passengers, String cargo_capacity) {
+public record CreateRebelBaseRequest(String name, String riskLevel, int shipCapacity) {
 }

@@ -1,4 +1,4 @@
-package org.acme.rebelrescue.app;
+package org.acme.rebelrescue.app.fleet;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import jakarta.ws.rs.core.MediaType;

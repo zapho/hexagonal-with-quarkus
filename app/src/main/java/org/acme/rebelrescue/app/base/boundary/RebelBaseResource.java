@@ -9,10 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.boundary;
+package org.acme.rebelrescue.app.base.boundary;
 
-
-import java.util.List;
-
-public record FleetResource(List<StarshipResource> starships) {
+public record RebelBaseResource(String name, String riskLevel, int shipCapacity) {
 }

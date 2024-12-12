@@ -9,7 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app;
+package org.acme.rebelrescue.app.fleet;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
@@ -21,10 +21,10 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
 public class ArchitectureCheckTest {
     @Test
-    public void fleet_domain_should_remain_isolated_from_infrastructure() {
+    public void fleet_domain_should_respect_dependency_rules() {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("org.acme");
 
-        ArchRule rule = classes()
+        ArchRule ruleFleetDomain = classes()
                 .that().resideInAPackage("org.acme.rebelrescue.fleet..")
                 .should().onlyDependOnClassesThat()
                 .resideInAnyPackage(
@@ -33,7 +33,41 @@ public class ArchitectureCheckTest {
                         "java..",
                         "org.apache.logging.log4j..");
 
-        rule.check(importedClasses);
+        ruleFleetDomain.check(importedClasses);
+    }
+
+    @Test
+    public void base_domain_should_respect_dependency_rules() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("org.acme");
+
+        ArchRule ruleBaseDomain = classes()
+                .that().resideInAPackage("org.acme.rebelrescue.base..")
+                .should().onlyDependOnClassesThat()
+                .resideInAnyPackage(
+                        "org.acme.rebelrescue.base..",
+                        "org.acme.rebelrescue.fleet..",
+                        "org.acme.rebelrescue.hyperspace..",
+                        "org.acme.ddd..",
+                        "java..",
+                        "org.apache.logging.log4j..");
+
+        ruleBaseDomain.check(importedClasses);
+    }
+
+    @Test
+    public void hyperspace_domain_should_respect_dependency_rules() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("org.acme");
+
+        ArchRule ruleHyperspaceDomain = classes()
+                .that().resideInAPackage("org.acme.rebelrescue.hyperspace..")
+                .should().onlyDependOnClassesThat()
+                .resideInAnyPackage(
+                        "org.acme.rebelrescue.hyperspace..",
+                        "org.acme.ddd..",
+                        "java..",
+                        "org.apache.logging.log4j..");
+
+        ruleHyperspaceDomain.check(importedClasses);
     }
 
     @Test

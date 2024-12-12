@@ -9,7 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.control.swapi;
+package org.acme.rebelrescue.app.fleet.control.swapi;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
@@ -47,7 +47,7 @@ public class WireMockSwapiService implements QuarkusTestResourceLifecycleManager
                         .withHeader("Content-Type", "application/json")
                         .withBody(fromFile("payloads/swapi-page2.json"))));
 
-        return Map.of("quarkus.rest-client.\"org.acme.rebelrescue.app.control.swapi.SwapiService\".url", wireMockServer.baseUrl());
+        return Map.of("quarkus.rest-client.\"org.acme.rebelrescue.app.fleet.control.swapi.SwapiService\".url", wireMockServer.baseUrl());
     }
 
     @Override

@@ -9,7 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.app.boundary;
+package org.acme.rebelrescue.base;
 
-public record StarshipResource(String name, int capacity) {
+public record RebelBase(String name, RiskLevel riskLevel, int shipCapacity) {
 }
