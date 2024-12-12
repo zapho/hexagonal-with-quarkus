@@ -11,5 +11,5 @@
  */
 package org.acme.rebelrescue.app.control.swapi;
 
-public record SwapiStarship(String name, String passengers) {
+public record SwapiStarship(String name, String passengers, String cargo_capacity) {
 }

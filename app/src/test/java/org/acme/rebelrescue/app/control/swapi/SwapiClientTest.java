@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.inject.Inject;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,8 +23,8 @@ class SwapiClientTest {
     void should_return_full_starship_inventory() {
         List<Starship> starships = client.starships();
         assertThat(starships).containsExactly(
-                new Starship("CR90 corvette", 600),
-                new Starship("Slave 1", 6),
-                new Starship("Death Star", 843342));
+                new Starship("CR90 corvette", 600, BigDecimal.valueOf(3000000)),
+                new Starship("Slave 1", 6, BigDecimal.valueOf(70000)),
+                new Starship("Death Star", 843342, BigDecimal.valueOf(1000000000000L)));
     }
 }

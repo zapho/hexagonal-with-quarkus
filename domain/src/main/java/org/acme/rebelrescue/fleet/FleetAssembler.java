@@ -41,7 +41,7 @@ public class FleetAssembler implements AssembleAFleet {
         while (numberOfPassengers > 0) {
             Starship starship = candidateStarships.removeFirst();
             rescueStarships.add(starship);
-            numberOfPassengers -= starship.capacity();
+            numberOfPassengers -= starship.passengersCapacity();
         }
         return rescueStarships;
     }
@@ -49,8 +49,8 @@ public class FleetAssembler implements AssembleAFleet {
     private List<Starship> stashipsWithPassengerCapacity() {
         return starshipInventory.starships()
                 .stream()
-                .filter(s -> s.capacity() > 0)
-                .sorted(Comparator.comparingInt(Starship::capacity))
+                .filter(s -> s.passengersCapacity() > 0)
+                .sorted(Comparator.comparingInt(Starship::passengersCapacity))
                 .toList();
     }
 }

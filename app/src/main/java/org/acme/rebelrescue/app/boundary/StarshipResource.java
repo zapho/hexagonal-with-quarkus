@@ -9,9 +9,7 @@
  *     The copyright notice above does not evidence any
  *    actual or intended publication of such source code.
  */
-package org.acme.rebelrescue.fleet;
+package org.acme.rebelrescue.app.boundary;
 
-import java.math.BigDecimal;
-
-public record Starship(String name, int passengersCapacity, BigDecimal cargoCapacity) {
+public record StarshipResource(String name, int capacity) {
 }

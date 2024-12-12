@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-class RescueFleetResourceTest {
+class RescueFleetResourceEndpointTest {
     @Test
     void can_assemble_a_fleet_for_5_passengers() {
         given()

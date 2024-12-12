@@ -12,16 +12,14 @@
 package org.acme.rebelrescue.app.control.swapi;
 
 import io.quarkus.runtime.Startup;
-import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Initialized;
-import jakarta.enterprise.event.Observes;
 import org.acme.rebelrescue.fleet.Starship;
 import org.acme.rebelrescue.fleet.spi.StarshipInventory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -99,7 +97,20 @@ public class SwapiClient implements StarshipInventory {
         return swapiStarShip ->
                 new Starship(
                         swapiStarShip.name(),
-                        parseInt(swapiStarShip.passengers().replaceAll(",", "")));
+                        parseInt(swapiStarShip.passengers().replaceAll(",", "")),
+                        cargoCapacity(swapiStarShip.cargo_capacity()));
+    }
+
+    private BigDecimal cargoCapacity(String cargoCapacity) {
+        BigDecimal capacity = BigDecimal.ZERO;
+        if (cargoCapacity != null
+                && !cargoCapacity.isBlank()
+                && !cargoCapacity.equalsIgnoreCase("unknown")
+                && !cargoCapacity.equalsIgnoreCase("n/a")
+        ) {
+            capacity = new BigDecimal(cargoCapacity.replaceAll(",", ""));
+        }
+        return capacity;
     }
 
     private Predicate<SwapiStarship> hasValidPassengersValue() {
