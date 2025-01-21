@@ -3,7 +3,9 @@
 A Quarkus-based implementation of https://gitlab.com/beyondxscratch/hexagonal-architecture-java-springboot
 with some additional features.
 
-Must watch https://www.youtube.com/watch?v=-dXN8wkN0yk&t=2212s
+Must watch:
+* https://www.youtube.com/watch?v=-dXN8wkN0yk&t=2212s (French version)
+* https://www.youtube.com/watch?v=YPmKHm7G19Q (English version)
 
 ## Build it
 
